@@ -1,0 +1,525 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Clickx API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" alt="Navbar" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" width="100" height="100" alt="Logo" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://app.clickx.io'>Clickx</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the Clickx API!.</p>
+
+<h1 id="authentication">Authentication</h1>
+
+<p>There are two ways for authentication</p>
+
+<ul>
+<li>simple Token based authentication</li>
+<li>Oauth2</li>
+</ul>
+
+<h2 id="simple-token-based-authentication">Simple Token based authentication</h2>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'net/http'</span>
+<span class="n">uri</span> <span class="o">=</span> <span class="no">URI</span><span class="p">(</span><span class="s1">'https://app.clickx.io/api/v1/login'</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="no">Net</span><span class="o">::</span><span class="no">HTTP</span><span class="p">.</span><span class="nf">post_form</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'&lt;email&gt;'</span><span class="p">,</span> <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'&lt;password&gt;'</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="n">res</span><span class="p">.</span><span class="nf">body</span>
+</code></pre><pre class="highlight shell tab-shell"><code> curl -H <span class="s2">"Content-Type: application/json"</span> -X POST -d <span class="s1">'{"email":"&lt;email&gt;","password":"&lt;password&gt;"}'</span> https://app.clickx.io/api/v1/login
+</code></pre>
+<p>Clickx api expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+
+<p><code class="prettyprint">X-USER-TOKEN: my_token</code></p>
+
+<aside class="notice">
+You must replace <code>my_token</code> with the token of the corresponding user.
+</aside>
+
+<h2 id="oauth2">OAuth2</h2>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'oauth2'</span>
+<span class="n">site</span>          <span class="o">=</span> <span class="s2">"https://app.clickx.io"</span>
+<span class="n">client_id</span>     <span class="o">=</span> <span class="s1">'&lt;client id&gt;'</span>
+<span class="n">client_secret</span> <span class="o">=</span> <span class="s1">'&lt;client secret&gt;'</span>
+<span class="n">redirect_uri</span>  <span class="o">=</span> <span class="s1">'&lt;redirect uri&gt;'</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="no">OAuth2</span><span class="o">::</span><span class="no">Client</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="n">client_id</span><span class="p">,</span> <span class="n">client_secret</span><span class="p">,</span> <span class="ss">:site</span> <span class="o">=&gt;</span> <span class="n">site</span><span class="p">)</span>
+
+<span class="n">client</span><span class="p">.</span><span class="nf">auth_code</span><span class="p">.</span><span class="nf">authorize_url</span><span class="p">(</span><span class="ss">:redirect_uri</span> <span class="o">=&gt;</span> <span class="n">redirect_uri</span><span class="p">)</span>
+
+<span class="n">token</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">auth_code</span><span class="p">.</span><span class="nf">get_token</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="ss">:redirect_uri</span> <span class="o">=&gt;</span> <span class="n">redirect_uri</span><span class="p">)</span>
+
+<span class="n">token</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="s2">"/api/v1/users/me"</span><span class="p">)</span>
+</code></pre>
+          <h1 id="locations">locations</h1>
+
+<h2 id="get-all-locations">Get All Locations</h2>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'clickx'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'user-token'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">locations</span><span class="p">.</span><span class="nf">get</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/v1/locations"</span>
+  -H <span class="s2">"X-USER-TOKEN: user-token"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"data"</span><span class="p">:[{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"216"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"locations"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Clickx"</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"222 W. Merchandise Mart Plaza, Suite 1212"</span><span class="p">,</span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"Chicago"</span><span class="p">,</span><span class="s2">"state"</span><span class="p">:</span><span class="s2">"IL"</span><span class="p">,</span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="s2">"zip"</span><span class="p">:</span><span class="s2">"60654"</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"312-945-7150"</span><span class="p">,</span><span class="s2">"mobile-phone"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"toll-free"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"www.clickx.io"</span><span class="p">,</span><span class="s2">"enquiry-email"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"fax"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"categories"</span><span class="p">:[],</span><span class="s2">"payment-methods"</span><span class="p">:[],</span><span class="s2">"products-services"</span><span class="p">:[],</span><span class="s2">"brands"</span><span class="p">:[],</span><span class="s2">"images"</span><span class="p">:[</span><span class="kc">null</span><span class="p">],</span><span class="s2">"languages"</span><span class="p">:[],</span><span class="s2">"professional-associations"</span><span class="p">:[],</span><span class="s2">"slogan"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"keywords"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"short-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"medium-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"full-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"long-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"number-of-users"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"year-established"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"user-id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2017-01-02T16:04:09.385-06:00"</span><span class="p">,</span><span class="s2">"updated-at"</span><span class="p">:</span><span class="s2">"2017-04-08T07:49:23.342-05:00"</span><span class="p">,</span><span class="s2">"business-id"</span><span class="p">:</span><span class="mi">27</span><span class="p">,</span><span class="s2">"local-profile-list"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"local-profile-last-upload"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"lat"</span><span class="p">:</span><span class="s2">"41.888244"</span><span class="p">,</span><span class="s2">"lng"</span><span class="p">:</span><span class="s2">"-87.635388"</span><span class="p">,</span><span class="s2">"operational-hours"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">"positive-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"negative-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"slug"</span><span class="p">:</span><span class="s2">"clickx"</span><span class="p">,</span><span class="s2">"short-url"</span><span class="p">:</span><span class="s2">"https://clickx.ly/2iw59R3"</span><span class="p">,</span><span class="s2">"reviews-count"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">"bl-reviews-info"</span><span class="p">:{},</span><span class="s2">"average-rating"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"contact-name"</span><span class="p">:</span><span class="s2">"Solomon Thimothy"</span><span class="p">}},{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"177"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"locations"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Clickx"</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"8833 Gross Point"</span><span class="p">,</span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"Skokie"</span><span class="p">,</span><span class="s2">"state"</span><span class="p">:</span><span class="s2">"IL"</span><span class="p">,</span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="s2">"zip"</span><span class="p">:</span><span class="s2">"60077"</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"8473271970"</span><span class="p">,</span><span class="s2">"mobile-phone"</span><span class="p">:</span><span class="s2">"847-327-1970"</span><span class="p">,</span><span class="s2">"toll-free"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"www.clickx.io"</span><span class="p">,</span><span class="s2">"enquiry-email"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"fax"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"categories"</span><span class="p">:[],</span><span class="s2">"payment-methods"</span><span class="p">:[],</span><span class="s2">"products-services"</span><span class="p">:[],</span><span class="s2">"brands"</span><span class="p">:[],</span><span class="s2">"images"</span><span class="p">:[</span><span class="kc">null</span><span class="p">],</span><span class="s2">"languages"</span><span class="p">:[],</span><span class="s2">"professional-associations"</span><span class="p">:[],</span><span class="s2">"slogan"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"keywords"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"short-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"medium-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"full-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"long-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"number-of-users"</span><span class="p">:</span><span class="mi">49</span><span class="p">,</span><span class="s2">"year-established"</span><span class="p">:</span><span class="mi">2006</span><span class="p">,</span><span class="s2">"user-id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2016-09-16T14:22:43.131-05:00"</span><span class="p">,</span><span class="s2">"updated-at"</span><span class="p">:</span><span class="s2">"2017-04-24T13:37:24.507-05:00"</span><span class="p">,</span><span class="s2">"business-id"</span><span class="p">:</span><span class="mi">27</span><span class="p">,</span><span class="s2">"local-profile-list"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"local-profile-last-upload"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"lat"</span><span class="p">:</span><span class="s2">"42.041672"</span><span class="p">,</span><span class="s2">"lng"</span><span class="p">:</span><span class="s2">"-87.755095"</span><span class="p">,</span><span class="s2">"operational-hours"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">"positive-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"negative-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"slug"</span><span class="p">:</span><span class="s2">"clickx-1000"</span><span class="p">,</span><span class="s2">"short-url"</span><span class="p">:</span><span class="s2">"https://clickx.ly/2irbXvV"</span><span class="p">,</span><span class="s2">"reviews-count"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">"bl-reviews-info"</span><span class="p">:{},</span><span class="s2">"average-rating"</span><span class="p">:</span><span class="mf">3.0</span><span class="p">,</span><span class="s2">"contact-name"</span><span class="p">:</span><span class="s2">"Layla Ella"</span><span class="p">}}]}</span><span class="err">%</span><span class="w"> 
+</span></code></pre>
+<p>This endpoint retrieves all locations.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://example.com/api/v1/locations</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>50</td>
+<td>Limit number of locations in response</td>
+</tr>
+</tbody></table>
+
+          <h1 id="agencies">Agencies</h1>
+
+<h2 id="get-all-agencies">Get All Agencies</h2>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'clickx'</span>
+
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/v1/agencies"</span>
+  -H <span class="s2">"X-USER-TOKEN: user-token"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"data"</span><span class="p">:[{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"2"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"agencies"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Clickx"</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"888-909-7265"</span><span class="p">,</span><span class="s2">"support-email"</span><span class="p">:</span><span class="s2">"support@clickx.io"</span><span class="p">,</span><span class="s2">"logo"</span><span class="p">:</span><span class="s2">"https://res.cloudinary.com/hwdkgnvx8/image/upload/v1435069959/agency_logos/admf5qb6oz47q908caok.png"</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"8833 Gross Point,  202, Skokie, IL 60077"</span><span class="p">}},{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"3"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"agencies"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"OneIMS"</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"8473271970"</span><span class="p">,</span><span class="s2">"support-email"</span><span class="p">:</span><span class="s2">"support@oneims.com"</span><span class="p">,</span><span class="s2">"logo"</span><span class="p">:</span><span class="s2">"https://res.cloudinary.com/hwdkgnvx8/image/upload/v1483997530/agency_logos/u6kgmg47srgi7gocxejq.png"</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"8833 Gross Point, Suite 202, Skokie, IL 60077"</span><span class="p">}},{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"4"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"agencies"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"TCompanies, Inc."</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"702-425-3100"</span><span class="p">,</span><span class="s2">"support-email"</span><span class="p">:</span><span class="s2">"support@clickx.io"</span><span class="p">,</span><span class="s2">"logo"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"405 Max Court #241A Henderson, NV 89011"</span><span class="p">}},{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"5"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"agencies"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Webs We Weave"</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"847.540.9668"</span><span class="p">,</span><span class="s2">"support-email"</span><span class="p">:</span><span class="s2">"support@clickx.io"</span><span class="p">,</span><span class="s2">"logo"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"818 Indigo Court, Lake Zurich, IL 60047"</span><span class="p">}}]}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all agencies.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://example.com/api/v1/agencies</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>50</td>
+<td>Limit number of agencies in response</td>
+</tr>
+</tbody></table>
+
+          <h1 id="notifications">Notifications</h1>
+
+<h2 id="get-all-notifications">Get All Notifications</h2>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'clickx'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'user-token'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">notifications</span><span class="p">.</span><span class="nf">get</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/v1/notifications"</span>
+  -H <span class="s2">"X-USER-TOKEN: user-token"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"data"</span><span class="p">:[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"9"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"notifications"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="s2">"New contact khh  created in Clickx"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"read-at"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"view-path"</span><span class="p">:</span><span class="s2">"/notifications/9/view"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2017-04-26T23:56:16.031-05:00"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"21"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"notifications"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"content"</span><span class="p">:</span><span class="s2">"New contact   created in Clickx"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"read-at"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"view-path"</span><span class="p">:</span><span class="s2">"/notifications/21/view"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2017-04-27T00:53:36.663-05:00"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+   </span><span class="p">},</span><span class="w">
+   </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"33"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"notifications"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"attributes"</span><span class="p">:</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"content"</span><span class="p">:</span><span class="s2">"New contact   created in Clickx"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"read-at"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"view-path"</span><span class="p">:</span><span class="s2">"/notifications/33/view"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2017-04-27T00:55:03.642-05:00"</span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"45"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"notifications"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"attributes"</span><span class="p">:{</span><span class="w">
+          </span><span class="s2">"content"</span><span class="p">:</span><span class="s2">"New contact   created in Clickx"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"read-at"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"view-path"</span><span class="p">:</span><span class="s2">"/notifications/45/view"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2017-04-27T00:55:52.773-05:00"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all notifications.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://example.com/api/v1/notifications</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>50</td>
+<td>Limit number of notifications in response</td>
+</tr>
+</tbody></table>
+
+          <h1 id="competitions">competitions</h1>
+
+<h2 id="get-all-competitions">Get All Competitions</h2>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'clickx'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'user-token'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">competitions</span><span class="p">.</span><span class="nf">get</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/v1/competitions"</span>
+  -H <span class="s2">"X-USER-TOKEN: user-token"</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="s2">"data"</span><span class="p">:[{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"216"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"competitions"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Clickx"</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"222 W. Merchandise Mart Plaza, Suite 1212"</span><span class="p">,</span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"Chicago"</span><span class="p">,</span><span class="s2">"state"</span><span class="p">:</span><span class="s2">"IL"</span><span class="p">,</span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="s2">"zip"</span><span class="p">:</span><span class="s2">"60654"</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"312-945-7150"</span><span class="p">,</span><span class="s2">"mobile-phone"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"toll-free"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"www.clickx.io"</span><span class="p">,</span><span class="s2">"enquiry-email"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"fax"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"categories"</span><span class="p">:[],</span><span class="s2">"payment-methods"</span><span class="p">:[],</span><span class="s2">"products-services"</span><span class="p">:[],</span><span class="s2">"brands"</span><span class="p">:[],</span><span class="s2">"images"</span><span class="p">:[</span><span class="kc">null</span><span class="p">],</span><span class="s2">"languages"</span><span class="p">:[],</span><span class="s2">"professional-associations"</span><span class="p">:[],</span><span class="s2">"slogan"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"keywords"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"short-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"medium-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"full-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"long-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"number-of-users"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"year-established"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"user-id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2017-01-02T16:04:09.385-06:00"</span><span class="p">,</span><span class="s2">"updated-at"</span><span class="p">:</span><span class="s2">"2017-04-08T07:49:23.342-05:00"</span><span class="p">,</span><span class="s2">"business-id"</span><span class="p">:</span><span class="mi">27</span><span class="p">,</span><span class="s2">"local-profile-list"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"local-profile-last-upload"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"lat"</span><span class="p">:</span><span class="s2">"41.888244"</span><span class="p">,</span><span class="s2">"lng"</span><span class="p">:</span><span class="s2">"-87.635388"</span><span class="p">,</span><span class="s2">"operational-hours"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">"positive-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"negative-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"slug"</span><span class="p">:</span><span class="s2">"clickx"</span><span class="p">,</span><span class="s2">"short-url"</span><span class="p">:</span><span class="s2">"https://clickx.ly/2iw59R3"</span><span class="p">,</span><span class="s2">"reviews-count"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s2">"bl-reviews-info"</span><span class="p">:{},</span><span class="s2">"average-rating"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"contact-name"</span><span class="p">:</span><span class="s2">"Solomon Thimothy"</span><span class="p">}},{</span><span class="s2">"id"</span><span class="p">:</span><span class="s2">"177"</span><span class="p">,</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"competitions"</span><span class="p">,</span><span class="s2">"attributes"</span><span class="p">:{</span><span class="s2">"name"</span><span class="p">:</span><span class="s2">"Clickx"</span><span class="p">,</span><span class="s2">"address"</span><span class="p">:</span><span class="s2">"8833 Gross Point"</span><span class="p">,</span><span class="s2">"city"</span><span class="p">:</span><span class="s2">"Skokie"</span><span class="p">,</span><span class="s2">"state"</span><span class="p">:</span><span class="s2">"IL"</span><span class="p">,</span><span class="s2">"country"</span><span class="p">:</span><span class="s2">"United States"</span><span class="p">,</span><span class="s2">"zip"</span><span class="p">:</span><span class="s2">"60077"</span><span class="p">,</span><span class="s2">"phone"</span><span class="p">:</span><span class="s2">"8473271970"</span><span class="p">,</span><span class="s2">"mobile-phone"</span><span class="p">:</span><span class="s2">"847-327-1970"</span><span class="p">,</span><span class="s2">"toll-free"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"website"</span><span class="p">:</span><span class="s2">"www.clickx.io"</span><span class="p">,</span><span class="s2">"enquiry-email"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"fax"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"categories"</span><span class="p">:[],</span><span class="s2">"payment-methods"</span><span class="p">:[],</span><span class="s2">"products-services"</span><span class="p">:[],</span><span class="s2">"brands"</span><span class="p">:[],</span><span class="s2">"images"</span><span class="p">:[</span><span class="kc">null</span><span class="p">],</span><span class="s2">"languages"</span><span class="p">:[],</span><span class="s2">"professional-associations"</span><span class="p">:[],</span><span class="s2">"slogan"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"keywords"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"short-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"medium-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"full-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"long-description"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"number-of-users"</span><span class="p">:</span><span class="mi">49</span><span class="p">,</span><span class="s2">"year-established"</span><span class="p">:</span><span class="mi">2006</span><span class="p">,</span><span class="s2">"user-id"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"created-at"</span><span class="p">:</span><span class="s2">"2016-09-16T14:22:43.131-05:00"</span><span class="p">,</span><span class="s2">"updated-at"</span><span class="p">:</span><span class="s2">"2017-04-24T13:37:24.507-05:00"</span><span class="p">,</span><span class="s2">"business-id"</span><span class="p">:</span><span class="mi">27</span><span class="p">,</span><span class="s2">"local-profile-list"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="s2">"local-profile-last-upload"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"lat"</span><span class="p">:</span><span class="s2">"42.041672"</span><span class="p">,</span><span class="s2">"lng"</span><span class="p">:</span><span class="s2">"-87.755095"</span><span class="p">,</span><span class="s2">"operational-hours"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="s2">"positive-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"negative-review-coupon"</span><span class="p">:</span><span class="kc">null</span><span class="p">,</span><span class="s2">"slug"</span><span class="p">:</span><span class="s2">"clickx-1000"</span><span class="p">,</span><span class="s2">"short-url"</span><span class="p">:</span><span class="s2">"https://clickx.ly/2irbXvV"</span><span class="p">,</span><span class="s2">"reviews-count"</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">"bl-reviews-info"</span><span class="p">:{},</span><span class="s2">"average-rating"</span><span class="p">:</span><span class="mf">3.0</span><span class="p">,</span><span class="s2">"contact-name"</span><span class="p">:</span><span class="s2">"Layla Ella"</span><span class="p">}}]}</span><span class="err">%</span><span class="w"> 
+</span></code></pre>
+<p>This endpoint retrieves all competitions.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET http://example.com/api/v1/competitions</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>limit</td>
+<td>50</td>
+<td>Limit number of competitions in response</td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+<aside class="notice"> .</aside>
+
+<p>The Clckx API uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
+<td>401</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The resource requested is hidden for administrators only</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found &ndash; The specified resource could not be found</td>
+</tr>
+<tr>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a resource with an invalid method</td>
+</tr>
+<tr>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The resource requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many resources! Slow down!</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
